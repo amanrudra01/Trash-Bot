@@ -1,4 +1,4 @@
-# ♻️ TrashBot: Intelligent Waste Monitoring System
+# ♻️ TrashBot: A Smart Waste Management System using Face Recognition
 
 ## 📖 Overview
 
