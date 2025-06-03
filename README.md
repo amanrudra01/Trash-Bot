@@ -43,3 +43,9 @@
 * Dashboard for visual analytics and report generation
 * Mobile app for real-time notifications
 * Multi-camera support for large-area coverage
+  
+---
+
+## Author
+
+Created by Aman Chand.
