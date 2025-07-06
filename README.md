@@ -1,4 +1,12 @@
 # ♻️ TrashBot: A Smart Waste Management System using Face Recognition
+![Python](https://img.shields.io/badge/Python-3.9+-blue?style=flat-square&logo=python)
+![OpenCV](https://img.shields.io/badge/OpenCV-Used-success?style=flat-square&logo=opencv)
+![Dlib](https://img.shields.io/badge/Dlib-Face%20Recognition-orange?style=flat-square)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-Hand%20Tracking-yellow?style=flat-square)
+![Scikit-learn](https://img.shields.io/badge/ML-Scikit--learn-lightblue?style=flat-square&logo=scikitlearn)
+![Face Recognition](https://img.shields.io/badge/Face%20Recognition-RealTime-critical?style=flat-square)
+![Object Tracking](https://img.shields.io/badge/Object%20Tracking-KCF%2FCSRT-green?style=flat-square)
+![Blob Detection](https://img.shields.io/badge/Blob%20Detection-Enabled-blueviolet?style=flat-square)
 
 ## 📖 Overview
 
