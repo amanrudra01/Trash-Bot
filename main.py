@@ -16,10 +16,6 @@ knn = joblib.load('knn_model.pkl')
 shape_predictor = dlib.shape_predictor('your_shape_predictor')
 face_rec_model = dlib.face_recognition_model_v1('resnet_model')
 
-# Mediapipe Hands
-mp_hands = mp.solutions.hands
-hands = mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7)
-
 # Background subtractor for falling object detection
 fgbg = cv2.createBackgroundSubtractorMOG2()
 
