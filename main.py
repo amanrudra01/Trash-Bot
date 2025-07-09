@@ -13,8 +13,8 @@ if not os.path.exists("Proofs"):
 
 # Load models
 knn = joblib.load('knn_model.pkl')
-shape_predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
-face_rec_model = dlib.face_recognition_model_v1('dlib_face_recognition_resnet_model_v1.dat')
+shape_predictor = dlib.shape_predictor('your_shape_predictor')
+face_rec_model = dlib.face_recognition_model_v1('resnet_model')
 
 # Mediapipe Hands
 mp_hands = mp.solutions.hands
@@ -65,14 +65,7 @@ while cap.isOpened():
         cv2.rectangle(frame, (rect.left(), rect.top()), (rect.right(), rect.bottom()), (0, 255, 0), 2)
         cv2.putText(frame, label, (rect.left(), rect.top() - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
 
-    # Hand detection
-    hand_positions = []
-    if results.multi_hand_landmarks:
-        for hand_landmarks in results.multi_hand_landmarks:
-            x_avg = int(np.mean([landmark.x * frame.shape[1] for landmark in hand_landmarks.landmark]))
-            y_avg = int(np.mean([landmark.y * frame.shape[0] for landmark in hand_landmarks.landmark]))
-            hand_positions.append((x_avg, y_avg))
-            cv2.circle(frame, (x_avg, y_avg), 10, (255, 0, 0), -1)
+
 
     # Background subtraction for falling object detection
     fgmask = fgbg.apply(frame)
