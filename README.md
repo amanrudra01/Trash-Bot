@@ -12,6 +12,7 @@
 
 **TrashBot** is an AI-powered waste monitoring system that uses computer vision and machine learning to determine whether waste is disposed of correctly in designated bins. The system aims to promote responsible waste management and support cleaner, smarter environments.
 
+
 ---
 
 ## 🚀 Features
