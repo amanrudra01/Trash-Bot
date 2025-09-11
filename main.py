@@ -19,7 +19,6 @@ face_rec_model = dlib.face_recognition_model_v1('resnet_model')
 # Background subtractor for falling object detection
 fgbg = cv2.createBackgroundSubtractorMOG2()
 
-
 # Load video
 cap = cv2.VideoCapture("both.mp4")  # Video file containing both INSIDE and OUTSIDE bin footage IN ONE
 
