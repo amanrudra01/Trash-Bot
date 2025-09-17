@@ -1,3 +1,5 @@
+# alpha
+
 import cv2
 import numpy as np
 import dlib
@@ -7,29 +9,33 @@ import time
 import os
 from datetime import datetime
 
+#memory, procesing power
+# final one
+
 # Create 'Proofs' folder if it doesn't exist
 if not os.path.exists("Proofs"):
     os.makedirs("Proofs")
 
 # Load models
 knn = joblib.load('knn_model.pkl')
-shape_predictor = dlib.shape_predictor('your_shape_predictor')
-face_rec_model = dlib.face_recognition_model_v1('resnet_model')
+shape_predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
+face_rec_model = dlib.face_recognition_model_v1('dlib_face_recognition_resnet_model_v1.dat')
 
-# Background subtractor for falling object detection
+# Mediapipe Hands
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7)
+
+# Background subtractor for blob detection
 fgbg = cv2.createBackgroundSubtractorMOG2()
 
 # Load video
-cap = cv2.VideoCapture("both.mp4")  # Video file containing both INSIDE and OUTSIDE bin footage IN ONE
+# cap = cv2.VideoCapture("mno.mp4")     #OUT SIDE THE BIN
+# cap = cv2.VideoCapture("mno2.mp4")      #INSIDE THE BIN
+cap = cv2.VideoCapture("both.mp4")      #BOTH INSIDE AND OUTSIDE THE BIN
 
-# Get video dimensions
+
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-
-# Define screen resolution (adjust if needed)
-screen_width = 1920
-screen_height = 1080
-resize_factor = 0.25  # Scale down to 25% of the screen size
 
 # Adjusted ground level
 ground_level = int(frame_height * 0.75)
@@ -61,7 +67,14 @@ while cap.isOpened():
         cv2.rectangle(frame, (rect.left(), rect.top()), (rect.right(), rect.bottom()), (0, 255, 0), 2)
         cv2.putText(frame, label, (rect.left(), rect.top() - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
 
-
+    # Hand detection
+    hand_positions = []
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            x_avg = int(np.mean([landmark.x * frame.shape[1] for landmark in hand_landmarks.landmark]))
+            y_avg = int(np.mean([landmark.y * frame.shape[0] for landmark in hand_landmarks.landmark]))
+            hand_positions.append((x_avg, y_avg))
+            cv2.circle(frame, (x_avg, y_avg), 10, (255, 0, 0), -1)
 
     # Background subtraction for falling object detection
     fgmask = fgbg.apply(frame)
@@ -98,13 +111,9 @@ while cap.isOpened():
     # Draw ground level line
     cv2.line(frame, (0, ground_level), (frame_width, ground_level), (0, 0, 255), 2)
 
-    # Resize frame to 25% of the screen size
-    frame = cv2.resize(frame, (int(screen_width * resize_factor), int(screen_height * resize_factor)))
-
     cv2.imshow('TrashBot System', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-
 
 cap.release()
 cv2.destroyAllWindows()
