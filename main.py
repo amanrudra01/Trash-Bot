@@ -9,6 +9,7 @@ from datetime import datetime
 #memory, procesing power
 # final one
 
+
 # Create 'Proofs' folder if it doesn't exist
 if not os.path.exists("Proofs"):
     os.makedirs("Proofs")
