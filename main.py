@@ -1,6 +1,3 @@
-# alpha
-
-import cv2
 import numpy as np
 import dlib
 import joblib
