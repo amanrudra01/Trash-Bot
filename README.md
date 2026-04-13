@@ -48,7 +48,6 @@
 
 ## 🔮 Future Enhancements
 
-* Integration with robotic arms for automated sorting
 * Dashboard for visual analytics and report generation
 * Mobile app for real-time notifications
 * Multi-camera support for large-area coverage
